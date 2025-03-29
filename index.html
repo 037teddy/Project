@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#8B0000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>CUEA Faculty CAT Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loader"></div>
+        <p>Loading...</p>
+    </div>
+
+    <div class="layout">
+        <div class="sidebar">
+            <div class="logo-container">
+                <img 
+                    src="./Images/cuea.jpeg" 
+                    alt="CUEA Logo" 
+                    class="cuea-logo"
+                    id="cueaLogo"
+                >
+                <h2>CUEA CAT Portal</h2>
+                <div class="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <i class="fas fa-moon"></i>
+                </div>
+            </div>
+            <div class="faculty-buttons">
+                <button class="faculty-btn" data-faculty="science">
+                    <i class="fas fa-flask"></i>
+                    Science
+                </button>
+                <button class="faculty-btn" data-faculty="arts">
+                    <i class="fas fa-paint-brush"></i>
+                    Arts and Social Science
+                </button>
+                <button class="faculty-btn" data-faculty="business">
+                    <i class="fas fa-chart-line"></i>
+                    Business
+                </button>
+                <button class="faculty-btn" data-faculty="api">
+                    <i class="fas fa-code"></i>
+                    API
+                </button>
+                <button class="faculty-btn" data-faculty="education">
+                    <i class="fas fa-graduation-cap"></i>
+                    Education
+                </button>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="header">
+                <h1>The Catholic University of Eastern Africa</h1>
+                <h2>Faculty CAT Portal</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search for units...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
+            <div id="marks-display">
+                <h2 id="selected-faculty">Select a faculty to view CAT codes</h2>
+                <div class="quick-filters">
+                    <button class="filter-btn active" data-year="all">All Years</button>
+                    <button class="filter-btn" data-year="1">Year 1</button>
+                    <button class="filter-btn" data-year="2">Year 2</button>
+                    <button class="filter-btn" data-year="3">Year 3</button>
+                </div>
+                <div id="marks-table"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-info-circle"></i>
+            <span class="toast-message"></span>
+        </div>
+        <div class="toast-progress"></div>
+    </div>
+
+    <!-- Add debug script -->
+    <script>
+        window.onload = function() {
+            const logo = document.getElementById('cueaLogo');
+            console.log('Current logo src:', logo.src);
+            console.log('Logo natural dimensions:', logo.naturalWidth, 'x', logo.naturalHeight);
+            
+            logo.addEventListener('error', function() {
+                console.log('Error loading image from:', this.src);
+            });
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

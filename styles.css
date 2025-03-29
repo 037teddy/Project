@@ -1,0 +1,919 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cuea-red: #8B0000;
+    --cuea-dark-red: #660000;
+    --cuea-light-red: #ffebee;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cuea-light-red);
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 280px;
+    background: linear-gradient(135deg, var(--cuea-dark-red) 0%, var(--cuea-red) 100%);
+    padding: 1rem;
+    color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    text-align: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.cuea-logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    background-color: white;
+    padding: 5px;
+}
+
+.cuea-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    border-color: white;
+}
+
+.logo-container h2 {
+    color: white;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Add a subtle glow effect */
+.logo-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.sidebar h2 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.faculty-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.faculty-btn {
+    padding: 1rem;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.faculty-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.faculty-btn.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(5px);
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--cuea-dark-red);
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.header h2 {
+    font-size: 1.4rem;
+    color: var(--cuea-red);
+}
+
+#marks-display {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#selected-faculty {
+    color: var(--cuea-red);
+    margin-bottom: 1.5rem;
+}
+
+.cat-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: white;
+}
+
+.cat-table th,
+.cat-table td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.cat-table th {
+    position: sticky;
+    top: 0;
+    background-color: var(--cuea-red);
+    color: white;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.cat-table tr:hover {
+    background-color: var(--cuea-light-red);
+}
+
+.cat-table td:first-child {
+    font-weight: 500;
+    color: var(--cuea-red);
+    width: 120px;
+    font-family: 'Consolas', monospace;
+}
+
+/* Year grouping styles */
+.cat-table tr.year-header td {
+    background-color: #f1f5f9;
+    font-weight: 600;
+    color: #1e3c72;
+    padding: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Semester grouping styles */
+.cat-table tr.semester-group {
+    border-left: 3px solid transparent;
+}
+
+.cat-table tr.semester-1 {
+    border-left-color: #4CAF50;
+}
+
+.cat-table tr.semester-2 {
+    border-left-color: #2196F3;
+}
+
+.download-btn {
+    padding: 0.5rem 1rem;
+    background-color: #2a5298;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.download-btn:hover {
+    background-color: #1e3c72;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.download-btn:active {
+    transform: translateY(0);
+}
+
+/* View Button Styles */
+.view-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--cuea-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+    background-color: var(--cuea-dark-red);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.view-btn:active {
+    transform: translateY(0);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    background-color: var(--cuea-red);
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--cuea-light-red);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.cats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.cat-item:hover {
+    border-color: #2a5298;
+    background-color: #f8f9fa;
+}
+
+.cat-info h4 {
+    color: #1e3c72;
+    margin: 0 0 0.5rem 0;
+}
+
+.cat-info p {
+    color: #666;
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+}
+
+.download-cat-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--cuea-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.download-cat-btn:hover {
+    background-color: var(--cuea-dark-red);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .logo-container {
+        padding: 1rem 0;
+        margin-bottom: 1rem;
+    }
+
+    .cuea-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .faculty-buttons {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        gap: 0.5rem;
+        margin: 0 -1rem;
+        padding: 0 1rem 0.5rem 1rem;
+    }
+
+    .faculty-btn {
+        white-space: nowrap;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+
+    .faculty-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .header h1 {
+        font-size: 1.4rem;
+    }
+
+    .header h2 {
+        font-size: 1.2rem;
+    }
+
+    #marks-display {
+        padding: 1rem;
+        margin: 0;
+        border-radius: 8px;
+        max-height: none;
+    }
+
+    .cat-table {
+        font-size: 0.9rem;
+    }
+
+    .cat-table th,
+    .cat-table td {
+        padding: 0.6rem;
+    }
+
+    /* Make table scrollable horizontally */
+    #marks-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .cat-table td:first-child {
+        width: auto;
+        min-width: 100px;
+    }
+
+    /* Modal adjustments for mobile */
+    .modal-content {
+        width: 95%;
+        margin: 1rem;
+        max-height: 90vh;
+    }
+
+    .modal-header {
+        padding: 1rem;
+    }
+
+    .modal-body {
+        padding: 1rem;
+    }
+
+    .cat-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .cat-info {
+        width: 100%;
+    }
+
+    .download-cat-btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem;
+    }
+
+    /* Improve touch targets */
+    .view-btn,
+    .download-btn,
+    .close-modal {
+        padding: 0.8rem;
+        min-height: 44px; /* Minimum touch target size */
+    }
+
+    /* Add pull-to-refresh feel */
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Small phone optimization */
+@media screen and (max-width: 380px) {
+    .header h1 {
+        font-size: 1.2rem;
+    }
+
+    .header h2 {
+        font-size: 1rem;
+    }
+
+    .faculty-btn {
+        padding: 0.7rem;
+        font-size: 0.85rem;
+    }
+
+    .cat-table {
+        font-size: 0.85rem;
+    }
+
+    .cat-table th,
+    .cat-table td {
+        padding: 0.5rem;
+    }
+}
+
+/* Landscape mode optimization */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    .sidebar {
+        padding: 0.5rem;
+    }
+
+    .logo-container {
+        padding: 0.5rem 0;
+        margin-bottom: 0.5rem;
+    }
+
+    .cuea-logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .faculty-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #marks-display {
+        max-height: 60vh;
+    }
+}
+
+/* Add these new styles before the media queries */
+
+/* Loading Animation */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(139, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2000;
+    color: white;
+}
+
+.loading-overlay.active {
+    display: flex;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--cuea-red);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+.switch input:checked + .slider {
+    background-color: var(--cuea-red);
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Search Container */
+.search-container {
+    position: relative;
+    max-width: 500px;
+    margin: 1rem auto;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    border: 2px solid var(--cuea-red);
+    border-radius: 25px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.2);
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--cuea-red);
+}
+
+/* Quick Filters */
+.quick-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--cuea-red);
+    background: transparent;
+    color: var(--cuea-red);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: var(--cuea-red);
+    color: white;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: none;
+    z-index: 1000;
+    min-width: 300px;
+}
+
+.toast.show {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: var(--cuea-red);
+    animation: progress 3s linear;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes progress {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+/* Faculty Button Icons */
+.faculty-btn i {
+    margin-right: 0.5rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Add hover effects to table rows */
+.cat-table tr {
+    transition: all 0.3s ease;
+}
+
+.cat-table tr:hover {
+    transform: translateX(5px);
+    background-color: var(--cuea-light-red);
+}
+
+/* Improve button interactions */
+.view-btn, .download-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.view-btn::after, .download-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.view-btn:active::after, .download-btn:active::after {
+    transform: translate(-50%, -50%) scale(2);
+}
+
+/* Add these new styles before the media queries */
+
+.controls-container {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.view-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: rgba(139, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.semester-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-label input {
+    display: none;
+}
+
+.toggle-text {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    color: var(--cuea-red);
+}
+
+.toggle-label input:checked + .toggle-text {
+    background-color: var(--cuea-red);
+    color: white;
+}
+
+.sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sort-select {
+    padding: 0.5rem;
+    border: 1px solid var(--cuea-red);
+    border-radius: 4px;
+    background-color: white;
+    color: var(--cuea-red);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sort-select:hover {
+    background-color: var(--cuea-light-red);
+}
+
+.sort-direction {
+    padding: 0.5rem;
+    border: 1px solid var(--cuea-red);
+    border-radius: 4px;
+    background-color: white;
+    color: var(--cuea-red);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sort-direction:hover {
+    background-color: var(--cuea-light-red);
+}
+
+.sort-direction i {
+    transition: transform 0.3s ease;
+}
+
+.sort-direction.ascending i {
+    transform: rotate(180deg);
+}
+
+/* Enhance table animations */
+.cat-table tbody tr {
+    animation: fadeIn 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .sort-select,
+[data-theme="dark"] .sort-direction {
+    background-color: #2d2d2d;
+    border-color: var(--cuea-red);
+    color: white;
+}
+
+[data-theme="dark"] .view-controls {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 768px) {
+    .view-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .sort-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .sort-select {
+        flex: 1;
+        margin-right: 0.5rem;
+    }
+} 
